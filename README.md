@@ -23,4 +23,23 @@ uvicorn main:app \
 ### Test
 Open /docs for Swagger UI
 
+## API Usage
+
+### POST /speech-to-text
+
+```md
+## Notes
+- Google Cloud credentials must be provided via environment variables
+- Colab is supported for testing only
+- Designed as a backend service, not a UI application
+
+**Request**
+```json
+{
+  "audio_url": "https://example.com/audio.webm",
+  "language_code": "en-US"
+}
+
+
+
 
