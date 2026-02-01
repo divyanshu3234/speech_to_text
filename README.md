@@ -14,7 +14,11 @@ Stateless, cloud-deployable speech-to-text backend built with FastAPI, FFmpeg, a
 - Google Cloud Speech credentials
 
 ### Run locally
-uvicorn main:app --host 0.0.0.0 --port 8000
+uvicorn main:app \
+  --host 0.0.0.0 \
+  --port 8000 \
+  --workers 4
+
 
 ### Test
 Open /docs for Swagger UI
