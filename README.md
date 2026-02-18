@@ -1,44 +1,40 @@
-## Speech-to-Text API
+##  Scalable Speech-to-Text API
 
-Stateless, cloud-deployable speech-to-text backend built with FastAPI, FFmpeg, and Google Cloud Speech, designed for scalability and async workloads.
+A production-ready, containerized Speech-to-Text microservice built with FastAPI, Google Cloud Speech-to-Text, and deployed on Cloud Run.
 
-### Features
-- Async API
-- Long audio support
-- FFmpeg-based audio normalization
-- Cloud-deployable
+This service:
 
-### Requirements
-- Python 3.10+
-- ffmpeg
-- Google Cloud Speech credentials
+Downloads audio from a public URL
 
-### Run locally
-uvicorn main:app \
-  --host 0.0.0.0 \
-  --port 8000 \
-  --workers 4
+Converts WEBM → WAV using ffmpeg
 
+Transcribes speech using Google Cloud Speech API
 
-### Test
-Open /docs for Swagger UI
+Returns clean JSON transcript
 
-## API Usage
+Built for scalability, async performance, and cloud-native deploym
 
-### POST /speech-to-text
+### Architecture
+Client
+   ↓
+Cloud Run (FastAPI container)
+   ↓
+Async audio download
+   ↓
+ffmpeg conversion (WEBM → 16kHz WAV)
+   ↓
+Google Speech-to-Text (long_running_recognize)
+   ↓
+JSON transcript response
 
-```md
-## Notes
-- Google Cloud credentials must be provided via environment variables
-- Colab is supported for testing only
-- Designed as a backend service, not a UI application
+#
 
-**Request**
+**Request via curl**
 ```json
-{
-  "audio_url": "https://example.com/audio.webm",
-  "language_code": "en-US"
-}
+curl -X POST "https://speech-to-text-api-322039733047.asia-south1.run.app/speech-to-text" \
+  -H "Content-Type: application/json" \
+  -d '{"audio_url":"https://your-audio-file.webm"}'
+
 
 
 
